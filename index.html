@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <h2>Base64 to svg</h2>
+    <input type="text" id="BASE64input" name="BASE64">
+    <div id="imgOutput"></div>
+
+    <script>
+
+        function base64DecodeUnicode(str) {
+            // Convert Base64 encoded bytes to percent-encoding, and then get the original string.
+            percentEncodedStr = atob(str).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join('');
+
+
+            return decodeURIComponent(percentEncodedStr);
+        }
+        $('#BASE64input').on('change paste keyup', function (event) {
+            var base64code = $('#BASE64input').val()
+
+            console.log(base64code)
+            $gg = base64DecodeUnicode(base64code)
+            console.log($gg)
+            //var svgimg = document.createElementNS("http://www.w3.org/2000/svg", "image");
+            //svgimg.setAttributeNS("http://www.w3.org/1999/xlink", 'xlink:href', image);
+
+            //document.getElementById("imgOutput").appendChild(svgimg);
+
+            $("#imgOutput").html($gg)
+        })
+
+
+        //$gg = base64DecodeUnicode('PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+JiN4YTs8cGF0aCBkPSJNMjU2LDBDMTE0LjYyNSwwLDAsMTE0LjYyNSwwLDI1NnMxMTQuNjI1LDI1NiwyNTYsMjU2czI1Ni0xMTQuNjI1LDI1Ni0yNTZTMzk3LjM3NSwwLDI1NiwweiBNMjU2LDQ4MCAgQzEzMi41LDQ4MCwzMiwzNzkuNSwzMiwyNTZTMTMyLjUsMzIsMjU2LDMyczIyNCwxMDAuNSwyMjQsMjI0UzM3OS41LDQ4MCwyNTYsNDgweiBNMzM1LjU2MywyNjUuODQ0ICBjNi4wOTQsMTAuMzEzLDkuMTU2LDIyLjM0NCw5LjE1NiwzNi4xMjVjMCwyMS4xNTYtNi4zMTMsMzguNzgxLTE4LjkwNiw1Mi44NzVjLTEyLjU5NCwxNC4xMjUtMzAuNzgxLDIyLjQzOC01NC41NjMsMjQuOTM4VjQxNiAgaC0zMC4zMTN2LTM2LjAzMWMtMzkuNjU2LTQuMDYzLTY0LjE4OC0yNy4xMjUtNzMuNjU2LTY5LjEyNWw0Ni44NzUtMTIuMjE5YzQuMzQ0LDI2LjQwNiwxOC43MTksMzkuNTk0LDQzLjEyNSwzOS41OTQgIGMxMS40MDYsMCwxOS44NDQtMi44MTMsMjUuMjE5LTguNDY5czguMDYzLTEyLjQ2OSw4LjA2My0yMC40NjljMC04LjI4MS0yLjY4OC0xNC41NjMtOC4wNjMtMTguODEzICBjLTUuMzc1LTQuMjgxLTE3LjM0NC05LjY4OC0zNS44NzUtMTYuMjVjLTE2LjY1Ni01Ljc4MS0yOS42ODgtMTEuNDY5LTM5LjA2My0xNy4xNTZjLTkuMzc1LTUuNjI1LTE3LTEzLjUzMS0yMi44NDQtMjMuNjg4ICBjLTUuODQ0LTEwLjE4OC04Ljc4MS0yMi4wNjMtOC43ODEtMzUuNTYzYzAtMTcuNzE5LDUuMjUtMzMuNjg4LDE1LjY4OC00Ny44NzVjMTAuNDM4LTE0LjE1NiwyNi44NzUtMjIuODEzLDQ5LjMxMy0yNS45NjlWOTZoMzAuMzEzICB2MjcuOTY5YzMzLjg3NSw0LjA2Myw1NS44MTMsMjMuMjE5LDY1Ljc4MSw1Ny41bC00MS43NSwxNy4xMjVjLTguMTU2LTIzLjUtMjAuNzE5LTM1LjI1LTM3Ljc4MS0zNS4yNSAgYy04LjU2MywwLTE1LjQzOCwyLjYyNS0yMC41OTQsNy44NzVjLTUuMTg4LDUuMjUtNy43ODEsMTEuNjI1LTcuNzgxLDE5LjA5NGMwLDcuNjI1LDIuNSwxMy40NjksNy41LDE3LjU2MyAgYzQuOTY5LDQuMDYzLDE1LjY4OCw5LjA5NCwzMi4wNjMsMTUuMTI1YzE4LDYuNTYzLDMyLjEyNSwxMi43ODEsNDIuMzQ0LDE4LjYyNUMzMjEuMjgxLDI0Ny40NjksMzI5LjQzOCwyNTUuNTYzLDMzNS41NjMsMjY1Ljg0NHoiLz4mI3hhOzwvc3ZnPg==');
+        //console.log($gg)
+        //$("#imgOutput").html($gg)
+
+        //console.log(base64DecodeUnicode('SGVsbG8g8J+Yig=='))  // Hello 😊
+        //console.log(base64DecodeUnicode('PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+JiN4YTs8cGF0aCBkPSJNMjU2LDBDMTE0LjYyNSwwLDAsMTE0LjYyNSwwLDI1NnMxMTQuNjI1LDI1NiwyNTYsMjU2czI1Ni0xMTQuNjI1LDI1Ni0yNTZTMzk3LjM3NSwwLDI1NiwweiBNMjU2LDQ4MCAgQzEzMi41LDQ4MCwzMiwzNzkuNSwzMiwyNTZTMTMyLjUsMzIsMjU2LDMyczIyNCwxMDAuNSwyMjQsMjI0UzM3OS41LDQ4MCwyNTYsNDgweiBNMzM1LjU2MywyNjUuODQ0ICBjNi4wOTQsMTAuMzEzLDkuMTU2LDIyLjM0NCw5LjE1NiwzNi4xMjVjMCwyMS4xNTYtNi4zMTMsMzguNzgxLTE4LjkwNiw1Mi44NzVjLTEyLjU5NCwxNC4xMjUtMzAuNzgxLDIyLjQzOC01NC41NjMsMjQuOTM4VjQxNiAgaC0zMC4zMTN2LTM2LjAzMWMtMzkuNjU2LTQuMDYzLTY0LjE4OC0yNy4xMjUtNzMuNjU2LTY5LjEyNWw0Ni44NzUtMTIuMjE5YzQuMzQ0LDI2LjQwNiwxOC43MTksMzkuNTk0LDQzLjEyNSwzOS41OTQgIGMxMS40MDYsMCwxOS44NDQtMi44MTMsMjUuMjE5LTguNDY5czguMDYzLTEyLjQ2OSw4LjA2My0yMC40NjljMC04LjI4MS0yLjY4OC0xNC41NjMtOC4wNjMtMTguODEzICBjLTUuMzc1LTQuMjgxLTE3LjM0NC05LjY4OC0zNS44NzUtMTYuMjVjLTE2LjY1Ni01Ljc4MS0yOS42ODgtMTEuNDY5LTM5LjA2My0xNy4xNTZjLTkuMzc1LTUuNjI1LTE3LTEzLjUzMS0yMi44NDQtMjMuNjg4ICBjLTUuODQ0LTEwLjE4OC04Ljc4MS0yMi4wNjMtOC43ODEtMzUuNTYzYzAtMTcuNzE5LDUuMjUtMzMuNjg4LDE1LjY4OC00Ny44NzVjMTAuNDM4LTE0LjE1NiwyNi44NzUtMjIuODEzLDQ5LjMxMy0yNS45NjlWOTZoMzAuMzEzICB2MjcuOTY5YzMzLjg3NSw0LjA2Myw1NS44MTMsMjMuMjE5LDY1Ljc4MSw1Ny41bC00MS43NSwxNy4xMjVjLTguMTU2LTIzLjUtMjAuNzE5LTM1LjI1LTM3Ljc4MS0zNS4yNSAgYy04LjU2MywwLTE1LjQzOCwyLjYyNS0yMC41OTQsNy44NzVjLTUuMTg4LDUuMjUtNy43ODEsMTEuNjI1LTcuNzgxLDE5LjA5NGMwLDcuNjI1LDIuNSwxMy40NjksNy41LDE3LjU2MyAgYzQuOTY5LDQuMDYzLDE1LjY4OCw5LjA5NCwzMi4wNjMsMTUuMTI1YzE4LDYuNTYzLDMyLjEyNSwxMi43ODEsNDIuMzQ0LDE4LjYyNUMzMjEuMjgxLDI0Ny40NjksMzI5LjQzOCwyNTUuNTYzLDMzNS41NjMsMjY1Ljg0NHoiLz4mI3hhOzwvc3ZnPg=='))  // Hello 😊
+
+    </script>
+
+
+
+    <h2>svg to Base64</h2>
+
+
+    <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();">
+    <textarea name="" id="base64output" cols="30" rows="10"></textarea>
+    <div id="imgTest"></div>
+    <script>
+
+        //SVG to BASE64
+
+        function encodeImageFileAsURL() {
+
+            var filesSelected = document.getElementById("inputFileToLoad").files;
+            if (filesSelected.length > 0) {
+                var fileToLoad = filesSelected[0];
+
+                var fileReader = new FileReader();
+
+                fileReader.onload = function (fileLoadedEvent) {
+                    var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+                    var newImage = document.createElement('img');
+                    newImage.src = srcData;
+
+                    document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+                    //alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+
+                    $("#base64output").html(document.getElementById("imgTest").innerHTML)
+
+
+                    console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                }
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        }
+    </script>
+</body>
+
+</html>
